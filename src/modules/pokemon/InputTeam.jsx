@@ -23,7 +23,7 @@ function InputTeam() {
 
     try {
       const docRef = await addDoc(collection(db, PASTES_COLLECTION), teamData);
-      navigate(`/croking-paste/${docRef.id}`);
+      navigate(`/${docRef.id}`);
     } catch (error) {
       console.error("Error saving data to Firestore:", error);
     }

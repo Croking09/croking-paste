@@ -7,8 +7,8 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/croking-paste/" element={<InputTeam />} />
-        <Route path="/croking-paste/:id" element={<PokemonTeam />} />
+        <Route path="/" element={<InputTeam />} />
+        <Route path="/:id" element={<PokemonTeam />} />
       </Routes>
     </div>
   );
