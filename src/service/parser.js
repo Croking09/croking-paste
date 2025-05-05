@@ -5,6 +5,9 @@ function parsePokemonData(pokemonInfo) {
     gender: "male",
     item: null,
     searchItem: null,
+    evs: {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0},
+    ivs: {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31},
+    level: 50,
   }
 
   const lines = pokemonInfo
@@ -68,9 +71,9 @@ function parsePokemonData(pokemonInfo) {
     } else if (line.startsWith("Tera Type:")) {
       pokemon.teraType = line.substring("Tera Type:".length).trim()
     } else if (line.startsWith("EVs:")) {
-      pokemon.evs = parseStats(line.substring("EVs:".length).trim())
+      pokemon.evs = parseStats(line.substring("EVs:".length).trim(), false)
     } else if (line.startsWith("IVs:")) {
-      pokemon.ivs = parseStats(line.substring("IVs:".length).trim())
+      pokemon.ivs = parseStats(line.substring("IVs:".length).trim(), true)
     } else if (line.includes("Nature")) {
       pokemon.nature = line.split(" Nature")[0].trim()
     }
@@ -114,17 +117,19 @@ function parsePokemonData(pokemonInfo) {
     }
   }
 
+  //console.log(pokemon);
+
   return pokemon
 }
 
-function parseStats(statsString) {
+function parseStats(statsString, iv) {
   const stats = {
-    hp: 0,
-    atk: 0,
-    def: 0,
-    spa: 0,
-    spd: 0,
-    spe: 0,
+    hp: iv ? 31 : 0,
+    atk: iv ? 31 : 0,
+    def: iv ? 31 : 0,
+    spa: iv ? 31 : 0,
+    spd: iv ? 31 : 0,
+    spe: iv ? 31 : 0,
   }
 
   const parts = statsString.split("/").map((part) => part.trim())
