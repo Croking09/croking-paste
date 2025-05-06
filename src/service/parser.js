@@ -1,3 +1,5 @@
+import { natures } from '../constants/pokemonNatures.js';
+
 function parsePokemonData(pokemonInfo) {
   const pokemon = {
     nickname: null,
@@ -8,6 +10,7 @@ function parsePokemonData(pokemonInfo) {
     evs: {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0},
     ivs: {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31},
     level: 50,
+    nature: "Hardy",
   }
 
   const lines = pokemonInfo
@@ -116,6 +119,8 @@ function parsePokemonData(pokemonInfo) {
       }
     }
   }
+
+  pokemon.natureStats = natures[pokemon.nature]
 
   //console.log(pokemon);
 
