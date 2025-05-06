@@ -9,6 +9,7 @@ import { PASTES_COLLECTION } from "../../constants/firestore.js";
 
 function InputTeam() {
   const [text, setText] = useState("");
+  const [teamName, setTeamName] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,8 +19,9 @@ function InputTeam() {
 
     const teamData = {};
     pokemonList.forEach((entry, index) => {
-      teamData[index.toString()] = entry.trim();
+      teamData[`Poke${index}`] = entry.trim();
     });
+    teamData['teamName'] = teamName;
 
     try {
       const docRef = await addDoc(collection(db, PASTES_COLLECTION), teamData);
@@ -42,6 +44,12 @@ function InputTeam() {
           onChange={(e) => setText(e.target.value)}
         />
         <br />
+        <input
+          type="text"
+          placeholder="Team name"
+          value={teamName}
+          onChange={(e) => setTeamName(e.target.value)}
+        />
         <button type="submit">Save team</button>
       </form>
     </div>

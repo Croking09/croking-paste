@@ -12,6 +12,7 @@ import { PASTES_COLLECTION } from "../../constants/firestore.js";
 
 function PokemonTeam() {
   const { id } = useParams();
+  const [teamName, setTeamName] = useState("");
   const [pokemonTeam, setPokemonTeam] = useState([]);
 
   useEffect(() => {
@@ -22,7 +23,12 @@ function PokemonTeam() {
       if (docSnap.exists()) {
         const data = docSnap.data();
 
-        const team = Object.values(data);
+        const teamName = data.teamName;
+        const team = Object.entries(data)
+          .filter(([key]) => key.startsWith("Poke"))
+          .map(([, value]) => value);
+
+        setTeamName(teamName);
         setPokemonTeam(team);
       } else {
         console.error("Doc not found");
@@ -34,7 +40,7 @@ function PokemonTeam() {
   
   return (
     <div>
-      <h1>Pokémon Team</h1>
+      <h1>{teamName}</h1>
       {pokemonTeam.map((pokemon, index) => {
         return (
           <Pokemon key={index} pokemonInfo={pokemon} />
