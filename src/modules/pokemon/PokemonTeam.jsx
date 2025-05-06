@@ -12,8 +12,12 @@ import { PASTES_COLLECTION } from "../../constants/firestore.js";
 
 function PokemonTeam() {
   const { id } = useParams();
-  const [teamName, setTeamName] = useState("");
-  const [pokemonTeam, setPokemonTeam] = useState([]);
+  const [teamData, setTeamData] = useState({
+    teamName: '',
+    description: '',
+    author: '',
+    team: [],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,12 +28,13 @@ function PokemonTeam() {
         const data = docSnap.data();
 
         const teamName = data.teamName;
+        const description = data.description;
+        const author = data.author;
         const team = Object.entries(data)
           .filter(([key]) => key.startsWith("Poke"))
           .map(([, value]) => value);
 
-        setTeamName(teamName);
-        setPokemonTeam(team);
+        setTeamData({ teamName, description, author, team });
       } else {
         console.error("Doc not found");
       }
@@ -40,13 +45,15 @@ function PokemonTeam() {
   
   return (
     <div>
-      <h1>{teamName}</h1>
-      {pokemonTeam.map((pokemon, index) => {
+      <h1>{teamData.teamName}</h1>
+      <p>{teamData.description}</p>
+      <p>Author: {teamData.author}</p>
+      {teamData['team'].map((pokemon, index) => {
         return (
           <Pokemon key={index} pokemonInfo={pokemon} />
         );
       })}
-      <CopyButton displayText="Copy team" copyText={pokemonTeam.join("\n\n")} />
+      <CopyButton displayText="Copy team" copyText={teamData['team'].join("\n\n")} />
     </div>
   );
 }

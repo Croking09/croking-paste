@@ -8,20 +8,26 @@ import { db } from "../../service/firebase.js";
 import { PASTES_COLLECTION } from "../../constants/firestore.js";
 
 function InputTeam() {
-  const [text, setText] = useState("");
-  const [teamName, setTeamName] = useState("");
+  const [formData, setFormData] = useState({
+    teamName: '',
+    description: '',
+    author: '',
+    team: '',
+  });
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const pokemonList = text.trim().split(/\n\s*\n/);
+    const pokemonList = formData.team.trim().split(/\n\s*\n/);
 
     const teamData = {};
     pokemonList.forEach((entry, index) => {
       teamData[`Poke${index}`] = entry.trim();
     });
-    teamData['teamName'] = teamName;
+    teamData['teamName'] = formData.teamName;
+    teamData['description'] = formData.description;
+    teamData['author'] = formData.author;
 
     try {
       const docRef = await addDoc(collection(db, PASTES_COLLECTION), teamData);
@@ -40,15 +46,31 @@ function InputTeam() {
           cols="75"
           placeholder="Paste your Pokémon team here..."
           autoFocus
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={formData.team}
+          onChange={(e) => setFormData({ ...formData, team: e.target.value })}
+          required
         />
         <br />
         <input
           type="text"
           placeholder="Team name"
-          value={teamName}
-          onChange={(e) => setTeamName(e.target.value)}
+          value={formData.teamName}
+          onChange={(e) => setFormData({ ...formData, teamName: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Description"
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Author"
+          value={formData.author}
+          onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+          required
         />
         <button type="submit">Save team</button>
       </form>
