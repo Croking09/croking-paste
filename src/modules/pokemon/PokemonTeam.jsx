@@ -44,7 +44,7 @@ function PokemonTeam() {
   }, [id]);
 
   return (
-    <main className="bg-pattern p-5">
+    <main className="p-5">
       <div className="flex flex-col gap-3 max-w-3xl">
         <h1 className="title">{teamData.teamName}</h1>
         <h2 className="subtitle">Author: {teamData.author}</h2>
@@ -58,7 +58,7 @@ function PokemonTeam() {
         </div>
       </div>
 
-      <section className="grid grid-cols-2 gap-5 pt-10">
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-5 pt-10">
         {teamData["team"].map((pokemon, index) => {
           return <Pokemon key={index} pokemonInfo={pokemon} />;
         })}

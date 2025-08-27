@@ -5,7 +5,7 @@ import InputTeam from "../pokemon/InputTeam.jsx";
 
 function App() {
   return (
-    <div>
+    <div className="bg-pattern">
       <Routes>
         <Route path="/" element={<InputTeam />} />
         <Route path="/:id" element={<PokemonTeam />} />

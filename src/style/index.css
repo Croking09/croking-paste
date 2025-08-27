@@ -15,6 +15,7 @@ button {
 html,
 body {
   font-family: "Inter Variable", sans-serif;
+  @apply min-h-screen;
 }
 
 .bg-pattern {
@@ -44,4 +45,9 @@ body {
 
 .subtitle {
   @apply text-2xl font-medium pb-0.5;
+}
+
+button:hover {
+  scale: 1.1;
+  transition: all 0.1s ease-in-out;
 }
