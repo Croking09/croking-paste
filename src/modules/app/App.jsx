@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 
 import PokemonTeam from "../pokemon/PokemonTeam.jsx";
 import InputTeam from "../pokemon/InputTeam.jsx";

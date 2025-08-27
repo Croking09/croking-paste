@@ -5,10 +5,12 @@ function CopyButton({ displayText, copyText }) {
     } catch (err) {
       console.error("Failed to copy text: ", err);
     }
-  }
+  };
 
   return (
-    <button onClick={() => copyToClipboard()}>{displayText}</button>
+    <button className="" onClick={() => copyToClipboard()}>
+      {displayText}
+    </button>
   );
 }
 

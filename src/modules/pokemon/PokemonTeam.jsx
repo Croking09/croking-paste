@@ -13,9 +13,9 @@ import { PASTES_COLLECTION } from "../../constants/firestore.js";
 function PokemonTeam() {
   const { id } = useParams();
   const [teamData, setTeamData] = useState({
-    teamName: '',
-    description: '',
-    author: '',
+    teamName: "",
+    description: "",
+    author: "",
     team: [],
   });
 
@@ -38,23 +38,27 @@ function PokemonTeam() {
       } else {
         console.error("Doc not found");
       }
-    }
+    };
 
     fetchData();
   }, [id]);
-  
+
   return (
-    <div>
+    <main className="bg-pattern">
       <h1>{teamData.teamName}</h1>
-      <p>{teamData.description}</p>
-      <p>Author: {teamData.author}</p>
-      {teamData['team'].map((pokemon, index) => {
-        return (
-          <Pokemon key={index} pokemonInfo={pokemon} />
-        );
-      })}
-      <CopyButton displayText="Copy team" copyText={teamData['team'].join("\n\n")} />
-    </div>
+      <h2>{teamData.description}</h2>
+      <h3>Author: {teamData.author}</h3>
+      <CopyButton
+        displayText="Copy this team"
+        copyText={teamData["team"].join("\n\n")}
+      />
+      <span>or Share the Link!</span>
+      <section>
+        {teamData["team"].map((pokemon, index) => {
+          return <Pokemon key={index} pokemonInfo={pokemon} />;
+        })}
+      </section>
+    </main>
   );
 }
 
