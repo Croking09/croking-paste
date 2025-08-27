@@ -8,7 +8,7 @@ function CopyButton({ displayText, copyText }) {
   };
 
   return (
-    <button className="" onClick={() => copyToClipboard()}>
+    <button className="glass px-2" onClick={() => copyToClipboard()}>
       {displayText}
     </button>
   );

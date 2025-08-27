@@ -44,16 +44,21 @@ function PokemonTeam() {
   }, [id]);
 
   return (
-    <main className="bg-pattern">
-      <h1>{teamData.teamName}</h1>
-      <h2>{teamData.description}</h2>
-      <h3>Author: {teamData.author}</h3>
-      <CopyButton
-        displayText="Copy this team"
-        copyText={teamData["team"].join("\n\n")}
-      />
-      <span>or Share the Link!</span>
-      <section>
+    <main className="bg-pattern p-5">
+      <div className="flex flex-col gap-3 max-w-3xl">
+        <h1 className="title">{teamData.teamName}</h1>
+        <h2 className="subtitle">Author: {teamData.author}</h2>
+        <h3 className="max-w-2xl text-pretty">{teamData.description}</h3>
+        <div>
+          <CopyButton
+            displayText="Copy this team"
+            copyText={teamData["team"].join("\n\n")}
+          />
+          <span> or Share the Link!</span>
+        </div>
+      </div>
+
+      <section className="grid grid-cols-2 gap-5 pt-10">
         {teamData["team"].map((pokemon, index) => {
           return <Pokemon key={index} pokemonInfo={pokemon} />;
         })}

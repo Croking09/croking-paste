@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import parsePokemonData from "../../service/parser.js";
 import calculateStat from "../../service/statCalculator.js";
 
 import CopyButton from "../common/CopyButton.jsx";
 import StatRadarChart from "./StatRadarChart.jsx";
+
+import pokeball from "../../assets/pokeball.webp";
 
 function Pokemon({ pokemonInfo }) {
   const pokemon = parsePokemonData(pokemonInfo);
@@ -47,9 +49,12 @@ function Pokemon({ pokemonInfo }) {
 
   return pokemonData == null ? null : (
     <article>
-      <div className="flex flex-row">
+      <div className="flex flex-row items-center pb-3">
         <div className="w-100">
-          <div className="flex flex-row items-end">
+          <div
+            className="flex flex-row items-end gap-x-3 bg-contain bg-no-repeat p-3"
+            style={{ backgroundImage: `url(${pokeball})` }}
+          >
             <img src={pokemonData.sprites.front_default} alt={pokemon.name} />
             <img
               src={itemSpriteUrl}
@@ -169,7 +174,7 @@ function Pokemon({ pokemonInfo }) {
         />
       </div>
 
-      <CopyButton displayText="Copy pokemon" copyText={pokemonInfo} />
+      <CopyButton displayText="Copy Pokémon" copyText={pokemonInfo} />
     </article>
   );
 }
